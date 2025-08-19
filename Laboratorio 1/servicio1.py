@@ -2,6 +2,8 @@
 import socket
 from datetime import datetime
 
+#holaa probando
+
 cliente_TCP = ("localhost", 9000)
 servidor_TCP = ("", 9002)
 
