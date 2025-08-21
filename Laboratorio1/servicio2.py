@@ -43,6 +43,7 @@ if __name__ == "__main__":
         conn, addr = s.accept()
         with conn:
             text = conn.recv(65535).decode("utf-8").strip()
+            print(f'Texto Recibido: {text}')
             if not text:
                 continue
             if finalizar(text):

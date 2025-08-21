@@ -34,10 +34,11 @@ def mandar_a_servicio_4(body_text: str):
 
     c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     c.connect(cliente_HTTP)
+    print("Mandando al servicio 4.")
     c.sendall(req)
-
-    resp = b""
+    resp = b"" 
     while True:
+
         chunk = c.recv(4096)
         if not chunk:
             break
@@ -74,7 +75,7 @@ if __name__ == "__main__":
         else:
             http_body = anadir_mensaje(text)
             resp_body = mandar_a_servicio_4(http_body)
-            print("Mandando al servicio 4.")
+            
 
             if finalizar(resp_body):
                 s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

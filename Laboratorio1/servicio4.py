@@ -11,6 +11,7 @@ archivo_txt = "mensaje_final.txt"
 # TCP a Servicio 1
 
 def mandar_a_servicio_1(text: str):
+    print("Mandar a Servicio 1")
     data = (text.rstrip() + "\n").encode("utf-8")
     c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     c.connect(cliente_TCP)
@@ -46,6 +47,7 @@ class HandlerHTTP(BaseHTTPRequestHandler):
             final_body = f"{datetime.now().isoformat(timespec='seconds')}-{palabra_finalizar}"
             final_bytes = final_body.encode("utf-8")
             self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Content-Length", str(len(final_bytes)))
             self.send_header("Connection", "close")
             self.end_headers()
@@ -58,7 +60,14 @@ class HandlerHTTP(BaseHTTPRequestHandler):
             largo_actual = len(nuevo_msg.split())
             tcp_msg = f"{datetime.now().isoformat(timespec='seconds')}-{min_largo}-{largo_actual}-{nuevo_msg}"
             mandar_a_servicio_1(tcp_msg)
-            self.send_response(200); self.end_headers()
+
+
+            resp_bytes = tcp_msg.encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Content-Length", str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
 
     def log_message(self, *args):
         pass

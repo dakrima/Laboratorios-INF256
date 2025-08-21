@@ -8,9 +8,7 @@ palabra_finalizar = "FINAL"
 
 def finalizar(text: str) -> bool:
     msg_partes = text.strip().rsplit("-", 1)
-    if len(msg_partes) == 2 and msg_partes[1].strip().upper() == palabra_finalizar:
-        return True
-    return len(text.rsplit("-", 3)) < 4
+    return len(msg_partes) == 2 and msg_partes[1].strip().upper() == palabra_finalizar
 
 ## TCP a Servicio 2
 
