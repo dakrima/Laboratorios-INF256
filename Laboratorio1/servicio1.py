@@ -47,7 +47,8 @@ if __name__ == "__main__" :
             if finalizar(text):
                 print("Recibido FINAL. Close!")
                 flag = True
-                continue
+                #continue
+                break
 
             _timestamp, min_str, _largo_actual, msg = text.rsplit("-", 3)
             extra = input("S1 - Palabra para agregar: ").strip()

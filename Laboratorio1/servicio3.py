@@ -70,8 +70,9 @@ if __name__ == "__main__":
             s2.connect(("localhost", 9000))
             s2.sendall(text.encode("utf-8"))
             s2.close()
-            flag = True
+            #flag = True
             print("FINALIZACIÓN obtenida. Close todo!")
+            break
         else:
             http_body = anadir_mensaje(text)
             resp_body = mandar_a_servicio_4(http_body)
@@ -82,8 +83,9 @@ if __name__ == "__main__":
                 s2.connect(("localhost", 9000))
                 s2.sendall(resp_body.encode("utf-8"))
                 s2.close()
-                flag = True
+                #flag = True
                 print("FINALIZACIÓN recibida de S4 y enviada a servicio 2 (TCP).")
+                break
 
 
     u.close()

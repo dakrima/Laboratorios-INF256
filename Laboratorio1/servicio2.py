@@ -51,8 +51,9 @@ if __name__ == "__main__":
                 sock.connect(("localhost", 9002))
                 sock.sendall(text.encode("utf-8"))
                 sock.close()
-                flag = True
+                #flag = True
                 print("FINALIZACIÓN mandado al servicio 1.")
+                break
             else:
                 udp_msg = anadir_mensaje(text)
                 mandar_a_servicio_3(udp_msg)

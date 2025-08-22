@@ -2,6 +2,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime
 import socket
+import threading
 
 servidor_HTTP = ("", 8000)
 cliente_TCP = ("localhost", 9002)
@@ -52,7 +53,9 @@ class HandlerHTTP(BaseHTTPRequestHandler):
             self.send_header("Connection", "close")
             self.end_headers()
             self.wfile.write(final_bytes)
-            self.server.shutdown()
+            #self.server.shutdown()
+            threading.Thread(target=self.server.shutdown, daemon=True).start()
+
             return
         else:
             extra = input("Palabra para agregar: ").strip()
