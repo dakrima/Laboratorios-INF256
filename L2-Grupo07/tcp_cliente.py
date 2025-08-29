@@ -47,14 +47,20 @@ def extraer_puertos_y_joke(respuesta):
 
 def fase_tcp():
     print("== Fase TCP ==")
+    print("Escribe comandos (GET, JOKE, EXIT). Escribe EXIT para terminar.\n")
+
     udp_port = None
     http_port = None
     joke_text = None
 
-    for comando in ("GET", "JOKE", "EXIT"):
-        print("> Enviando:", comando)
+    while True:
+        comando = input("> Ingresa un comando: ").strip().upper()
+        if not comando:
+            continue
+
         resp = enviar_comando_tcp(comando)
-        print("< Respuesta:" + (resp or "(vacía)"))
+        print("< Respuesta:\n" + (resp or "(vacía)"))
+
         u, h, j = extraer_puertos_y_joke(resp)
         if udp_port is None and u is not None:
             udp_port = u
@@ -63,4 +69,8 @@ def fase_tcp():
         if joke_text is None and j:
             joke_text = j
 
+        if comando == "EXIT":
+            break
+
     return udp_port, http_port, joke_text
+
