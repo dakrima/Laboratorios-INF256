@@ -18,7 +18,7 @@ def main():
     print("JOKE:", joke_text)
 
     if udp_port is None or not joke_text:
-        print("Falta UDP_PORT o no se obtuvo JOKE. Ajusta el parsing o config.")
+        print("Falta UDP_PORT o no se obtuvo JOKE.")
         return
     print("\n== Fase UDP ==")
     frase = enviar_udp_y_recibir(joke_text, udp_port)
@@ -28,7 +28,7 @@ def main():
     print("Frase UDP:", frase)
 
     if http_port is None:
-        print("Falta HTTP_PORT. Ajusta el parsing o config.")
+        print("Falta HTTP_PORT.")
         return
     print("\n== Fase HTTP ==")
     status, body = post_frase(frase, GRUPO_ID, http_port)

@@ -12,13 +12,16 @@ def construir_post(frase, grupo_id, puerto_http):
         "Content-Length: " + str(len(body)) + "\r\n"
         "Connection: close\r\n\r\n"
     ).encode("utf-8") + body
+    # print(f"REQUEST: {req}")
     return req
 
 def post_frase(frase, grupo_id, puerto_http):
     req = construir_post(frase, grupo_id, puerto_http)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(SOCKET_TIMEOUT)
+    # print("Pase Time Out")
     s.connect((HOST, puerto_http))
+    # print("PASE HOST Y HTTP")
     s.sendall(req)
     partes = []
     try:
